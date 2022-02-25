@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, TextInput } from "react-native";
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
+import Emoji from 'a11y-react-emoji'
 
 export default class Post extends Component {
     constructor(props){
@@ -14,7 +15,7 @@ export default class Post extends Component {
     onComment(){
         const posteoActualizar= db.collection("posts").doc(this.props.postId);
         if(this.state.comment == ''){
-            alert('Por favor, escribí un comentario.')
+            alert('Comment anything!')
         } else {
             posteoActualizar.update({
                 comments: firebase.firestore.FieldValue.arrayUnion({
@@ -47,13 +48,11 @@ export default class Post extends Component {
                         </>
                     )}
                     />
-                ) : (
-                <Text>No hay comentarios</Text>
-                )}
+                ) : null
+                }
 
                 <TextInput
                 keyboardType="default"
-                placeholder="Comentá!"
                 multiline={true}
                 numberOfLines={1}
                 onChangeText={(text) => this.setState({ comment: text })}
@@ -61,7 +60,7 @@ export default class Post extends Component {
                 style={styles.placeholder}
                 />
                 <TouchableOpacity style={styles.post} onPress={() => this.onComment()}>
-                    <Text style={styles.post}>Post</Text>
+                    <Emoji symbol="✉️" label="send" />
                 </TouchableOpacity>
             </View>
         );
@@ -74,9 +73,12 @@ const styles= StyleSheet.create({
     },
 
     post:{
-        backgroundColor: "salmon",
+        flex: 1,
+        alignItems: 'center',
+        width: 50,
+        backgroundColor: 'greenyellow',
         padding: 4,
-        margin: 2,
+        margin: 4,
         borderRadius: 4,
     },
 

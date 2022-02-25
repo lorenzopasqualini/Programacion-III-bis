@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image, ImageBackground} from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
 import MyCamera from '../components/MyCamera';
+import Emoji from 'a11y-react-emoji'
 
 export default class CreatePost extends Component {
     constructor(props){
@@ -25,7 +26,7 @@ export default class CreatePost extends Component {
         })
         .then(response=> {
             console.log(response);
-            alert('Posteo realizado!');
+            alert('All done! Enjoy your post!');
             this.setState({
                 comment: ''
             })
@@ -34,7 +35,7 @@ export default class CreatePost extends Component {
         })
         .catch(e=> {
             console.log(e);
-            alert('Se produjo un error');
+            alert('An error occurred');
         })
     }
 
@@ -53,7 +54,6 @@ export default class CreatePost extends Component {
             :
             <>
             <View style={styles.container}>
-            <ImageBackground source={require('../../assets/bg.png')} style={styles.bg}>
                 <Image
                     source ={{uri: this.state.photo}}
                     style = {styles.preview}
@@ -61,16 +61,14 @@ export default class CreatePost extends Component {
                 <TextInput
                     style={styles.field}
                     keyboardType='default'
-                    placeholder="Publicá tu comentario"
                     multiline={true}
-                    numberOfLines = {2}
+                    numberOfLines = {1}
                     onChangeText={text => this.setState({ comment: text })}
                     value = {this.state.comment}
                 />
                 <TouchableOpacity style = {styles.button} onPress={() => this.handlePost()}>
-                    <Text style = {styles.text}> Post </Text>
+                    <Text> <Emoji symbol="🖼️" label="post" /> </Text>
                 </TouchableOpacity>
-            </ImageBackground>
             </View>
             </>
             }
@@ -82,39 +80,29 @@ export default class CreatePost extends Component {
 const styles= StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'lightseagreen'
     },
 
     field: {
-        width: '50%',
+        width: 250,
         backgroundColor: 'white',
         color: 'black',
-        margin: 10
+        margin: 10,
+        borderRadius: 4
     },
 
     button: {
-        width: '40%',
-        backgroundColor: 'salmon',
+        width: 250,
+        backgroundColor: 'greenyellow',
         textAlign: 'center',
         padding: 10,
+        borderRadius: 4
     },
 
-    text: {
-        color: 'white',
-        fontSize: 20
+    preview: {
+        width: 250,
+        height: 250,
+        resizeMode: 'contain',
     },
-
-    bg: {
-        flex: 1,
-        alignItems: 'center',
-        width: '100%',
-        height: '100%'        
-    },
-
-    preview:{
-        width: '50%',
-        height: '50%',
-        margin: 4,
-        borderRadius: 10
-    }
 })

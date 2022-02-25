@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Modal } from 'react-na
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 import Comments from '../components/Comments';
+import Emoji from 'a11y-react-emoji'
 
 export default class Post extends Component{
 
@@ -81,49 +82,11 @@ export default class Post extends Component{
         console.log(this.props.dataItem);
         return(
             <View style={styles.container}>
-                <View style={styles.previewView}>
-                    <Image 
-                    style={styles.preview}
-                    source={{uri: this.props.dataItem.data.photo}}
-                    />
-                </View>
 
-                <Text style={styles.desc}>{this.props.dataItem.data.description}</Text>
-                <Text style={styles.descUser}>{this.props.dataItem.data.owner}</Text>
-                <Text style={styles.desc}>{this.formatDate(this.props.dataItem.data.createdAt)}</Text>
-                <Text style={styles.desc}>Liked by {this.state.likes}</Text>
+                <Text style={styles.descBold}>{this.props.dataItem.data.owner}</Text>
 
-                {
-                    !this.state.liked ?
-                    <TouchableOpacity style={styles.like} onPress = {()=> this.onLike()}>
-                        <Text>
-                            Like
-                        </Text>
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity style={styles.unlike} onPress = {()=> this.onDislike()}>
-                        <Text>
-                            Unlike
-                        </Text>
-                    </TouchableOpacity>
-                }
-
-                {this.props.dataItem.data.owner == auth.currentUser.displayName ? (
-                <TouchableOpacity
-                    onPress={()=>
-                        this.props.deletePost(this.props.dataItem.data.createdAt)
-                    }
-                    style={styles.delete}
-                > Delete
-                </TouchableOpacity>
-                )
-                : null
-                }
-
-                <TouchableOpacity onPress={()=>{this.showModal()}}>
-                    <Text style={styles.desc}>
-                        Ver comentarios
-                    </Text>
+                <TouchableOpacity style={styles.comment} onPress={()=>{this.showModal()}}>
+                    <Emoji symbol="✍️" label="comments" />
                 </TouchableOpacity>
                 {
                     this.state.showModal ?
@@ -134,8 +97,8 @@ export default class Post extends Component{
                         style = {styles.modal}
                         >
                             <View style={styles.modalView}>
-                                <TouchableOpacity style={styles.closeModal} onPress={()=>{this.closeModal()}}>
-                                        <Text style={styles.desc}> X </Text>
+                                <TouchableOpacity onPress={()=>{this.closeModal()}}>
+                                    <Emoji symbol="❌" label="delete" />
                                 </TouchableOpacity>
                                 <Comments
                                 comments={this.props.dataItem.data.comments}
@@ -146,6 +109,43 @@ export default class Post extends Component{
                         :
                         null
                 }
+
+                <Image 
+                style={styles.image}
+                source={{uri: this.props.dataItem.data.photo}}
+                />
+
+                <Text style={styles.description}>{this.props.dataItem.data.description}</Text>
+                <Text style={styles.descBold}>{this.formatDate(this.props.dataItem.data.createdAt)}</Text>
+
+                <View style={styles.twobtn}>
+                    {
+                        !this.state.liked ?
+                        <TouchableOpacity style={styles.like} onPress = {()=> this.onLike()}>
+                            <Emoji symbol="💕" label="like" />
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={styles.delete} onPress = {()=> this.onDislike()}>
+                            <Emoji symbol="💕" label="unlike" />
+                        </TouchableOpacity>
+                    }
+
+                    {
+                        this.props.dataItem.data.owner == auth.currentUser.displayName ? (
+                        <TouchableOpacity
+                            onPress={()=>
+                                this.props.deletePost(this.props.dataItem.data.createdAt)
+                            }
+                            style={styles.delete}
+                        > <Emoji symbol="❌" label="delete" />
+                        </TouchableOpacity>
+                        )
+                        : null
+                    }
+                </View>
+
+                <Text style={styles.descBold}><Emoji symbol="💕" label="like" />{this.state.likes}</Text>
+
             </View>
         )
     }
@@ -154,79 +154,85 @@ export default class Post extends Component{
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        justifyContent: 'center',
+        alignItems: 'center',
         padding: 10,
         margin: 10,
-    },
-    
-    closeModal:{
-        alignSelf: 'flex-end',
-        padding: 10,
-        backgroundColor: 'salmon',
-        marginTop: 2,
-        marginBotom: 10,
+        width: 250,
         borderRadius: 4,
+        backgroundColor: 'darkslategrey',
+        position: 'relative',
+        zIndex: -1000,
     },
 
-    modalText:{
-        fontWeight: 'bold',
-        color: 'white',
-    },
-
-    modalView:{
-        backgroundColor: 'lightblue',
-        borderRadius: 4,
-        padding: 4,
-    },
-
-    modal:{
-        border: 'none',
-        width: '100%',
+    image: {
+        flex: 1,
+        width: 250,
+        height: 250,
+        resizeMode: 'contain'
     },
 
     like:{
-        backgroundColor: 'lightgreen',
-        borderRadius: 4,
+        backgroundColor: 'greenyellow',
         textAlign: 'center',
-        padding: 8,
-    },
-
-    unlike:{
-        backgroundColor: 'salmon',
         borderRadius: 4,
-        textAlign: 'center',
-        padding: 8,
-    },
-
-    previewView:{
-        width: '50%',
-    },
-    
-    preview: {
-        width: '100%',
-        height: 500,
-        borderRadius: 10,
-    },
-
-    desc:{
-        color: 'white',
-        margin: 4,
-    },
-
-    descUser:{
-        color: 'white',
-        margin: 4,
-        fontWeight: 'bold',
+        padding: 4,
+        margin: 2,
+        width: 50,
+        flex: 1,
+        alignItems: 'center'
     },
 
     delete:{
-        fontFamily: 'Arial',
-        color: 'white',
+        backgroundColor: 'tomato',
         textAlign: 'center',
-        backgroundColor: 'crimson',
         borderRadius: 4,
-        margin: 4,
         padding: 4,
-        width: '100%',
+        margin: 2,
+        width: 50,
+        flex: 1,
+        alignItems: 'center'
     },
+
+    comment:{
+        backgroundColor: 'dodgerblue',
+        textAlign: 'center',
+        borderRadius: 4,
+        padding: 4,
+        width: 50,
+    },
+
+    description:{
+        backgroundColor: 'dodgerblue',
+        color: 'white',
+        padding: 8,
+        width: 250,
+    },
+
+    descBold:{
+        color: 'white',
+        padding: 8,
+        width: 250,
+    },
+
+    twobtn:{
+        display: 'flex',
+        flexDirection: 'row'
+    },
+
+    modal:{
+        flex: 1,
+        width: 200,
+        height: 100,
+        resizeMode: 'contain',
+        border: 'none',
+        margin: 4,
+        position: 'fixed',
+        zIndex: 9999,
+    },
+
+    modalView:{
+        backgroundColor: 'aquamarine',
+        borderRadius: 4,
+        padding: 4,
+    }
 })

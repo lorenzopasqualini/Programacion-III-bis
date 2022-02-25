@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import Post from '../components/Post';
 import { db } from '../firebase/config';
 
@@ -45,7 +45,6 @@ export default class Home extends Component {
         console.log(this.props.dataItem);
         return(
             <View style= {styles.container}>
-                <ImageBackground source={require('../../assets/bg.png')} style={styles.bg}>
                 <FlatList
                     data= {this.state.posts}
                     keyExtractor= {post=> post.id.toString()}
@@ -56,7 +55,6 @@ export default class Home extends Component {
                         ></Post>
                     }
                 />
-                </ImageBackground>
             </View>
         )
     }
@@ -65,11 +63,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
-    },
-
-    bg:{
-        width: '100%',
-        height: '100%',      
-    },
+        alignItems: 'center',
+        backgroundColor: 'lightseagreen'
+    }
 })

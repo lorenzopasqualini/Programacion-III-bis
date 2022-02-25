@@ -2,6 +2,7 @@ import { Camera } from 'expo-camera';
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { storage } from '../firebase/config';
+import Emoji from 'a11y-react-emoji'
 
 export default class MyCamera extends Component{
     constructor(props){
@@ -69,12 +70,12 @@ export default class MyCamera extends Component{
             style= {styles.preview}
             source= {{uri: this.state.photo}}
             />
-            <View style= {styles.btnContainer}>
+            <View style= {styles.btnthumb}>
                 <TouchableOpacity style={styles.reject} onPress={()=> this.onReject()}>
-                    <Text style={styles.text}>Cancelar</Text>
+                    <Emoji symbol="👎" label="thumbsdown" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.accept} onPress={()=> this.uploadImage()}>
-                    <Text style={styles.text}>Subir</Text>
+                    <Emoji symbol="👍" label="thumbsup" />
                 </TouchableOpacity>
             </View>
             </>
@@ -86,7 +87,7 @@ export default class MyCamera extends Component{
             >
                 <View style= {styles.buttonContainer}>
                     <TouchableOpacity
-                        style= {styles.button}
+                        style= {styles.btnshutter}
                         onPress= {()=> this.takePicture()}>
                     </TouchableOpacity>
                 </View>
@@ -100,60 +101,60 @@ export default class MyCamera extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
+        alignItems: 'center',
+        backgroundColor: 'lightseagreen'
     },
+
     camera: {
         flex: 1,
         width: '100%',
     },
+
     buttonContainer: {
-        width: '100%',
-        height: 124,
-        position: 'absolute',
-        bottom: 40,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
+        height: 125,
+        bottom: 40,
+        position: 'absolute',
+        width: '100%',
     },
-    button: {
-        width: 124,
+
+    btnshutter: {
+        width: 125,
         height: '100%',
         borderWidth: 5,
         borderColor: 'white',
         borderRadius: 100,
-        backgroundColor: 'rgba(0,0,0,0.1)'
+        backgroundColor: 'rgba(0,0,0,0.1)',
     },
-    text: {
-        width: '100%',
-        textAlign: 'center',
-        color: 'white',
-        paddingTop: 15
-    },
-    imageContainer: {
-        height: '90%',
-    },
+
     preview: {
-        width: '100%',
-        flex: 6
+        flex: 3,
+        width: 250,
+        height: 250,
+        resizeMode: 'contain',
     },
-    btnContainer: {
-        flex: 1,
-        backgroundColor: '#000020',
+
+    btnthumb: {
+        flex: 3,
+        gap: 6,
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        width: '100%',
     },
+
     accept: {
-        width: 100,
+        backgroundColor: 'greenyellow',
+        width: 50,
         height: 50,
-        backgroundColor: '#7F6DF3',
-        borderRadius: 50
+        borderRadius: 4,
+        textAlign: 'center',
     },
+
     reject: {
-        width: 100,
+        backgroundColor: 'tomato',
+        width: 50,
         height: 50,
-        backgroundColor: '#FF392B',
-        borderRadius: 50
+        borderRadius: 4,
+        textAlign: 'center',
     }
 })

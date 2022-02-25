@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, ImageBackground} from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { auth } from '../firebase/config';
+import Emoji from 'a11y-react-emoji'
 
 export default class Register extends Component {
     constructor(props){
@@ -24,8 +25,6 @@ export default class Register extends Component {
     render(){
         return (
             <View style= {styles.container}>
-            <ImageBackground source={require('../../assets/bg.png')} style={styles.image}>
-                <Text style= {styles.text}> Registro </Text>
                 <TextInput
                     style= {styles.field}
                     keyboardType= 'default'
@@ -46,9 +45,8 @@ export default class Register extends Component {
                     onChangeText= {text=> this.setState({ password: text })}
                 />
                 <TouchableOpacity style= {styles.button} onPress={()=> this.handleRegister()}>
-                    <Text style= {styles.text}> Sign Up </Text>
+                    <Emoji symbol="🥰" label="register" />
                 </TouchableOpacity>
-            </ImageBackground>
             </View>
         )
     }
@@ -57,21 +55,24 @@ export default class Register extends Component {
 const styles= StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'lightseagreen'
     },
 
     field: {
-        width: '80%',
+        width: 250,
         backgroundColor: 'white',
         padding: 10,
-        marginVertical: 10
+        marginVertical: 10,
+        borderRadius: 4
     },
 
     button: {
-        width: '30%',
-        backgroundColor: 'salmon',
+        width: 250,
+        backgroundColor: 'greenyellow',
         textAlign: 'center',
         padding: 10,
+        borderRadius: 4
     },
 
     text: {

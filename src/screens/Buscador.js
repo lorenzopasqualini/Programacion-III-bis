@@ -1,5 +1,5 @@
 import React, { Component }  from "react";
-import {View, StyleSheet, FlatList, TextInput, ImageBackground} from "react-native";
+import {View, StyleSheet, FlatList, TextInput } from "react-native";
 import Post from '../components/Post';
 import { db } from '../firebase/config';
 
@@ -33,11 +33,9 @@ export default class Buscador extends Component{
         console.log(this.state.posts);
         return(
             <View style={styles.container}>
-            <ImageBackground source={require('../../assets/bg.png')} style={styles.bg}>
                 <TextInput style={styles.container}
                     style={styles.field}
                     keyboardType = 'default'
-                    placeholder = 'Search by user'
                     onChangeText = {text => this.onSearch({ posts: text})}
                 />
                 <FlatList
@@ -47,7 +45,6 @@ export default class Buscador extends Component{
                         <Post dataItem={item}></Post>
                     }
                 />
-            </ImageBackground>
             </View>
         )
     }
@@ -56,20 +53,15 @@ export default class Buscador extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-
-    bg: {
-        flex: 1,
         alignItems: 'center',
-        width: '100%',
-        height: '100%'        
+        backgroundColor: 'lightseagreen'
     },
 
     field: {
-        width: '80%',
+        width: 250,
         backgroundColor: 'white',
-        padding: 8,
+        padding: 4,
         margin: 8,
-        borderRadius: 8,
+        borderRadius: 4,
     },
 })

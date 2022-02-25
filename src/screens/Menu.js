@@ -5,7 +5,7 @@ import Login from './Login';
 import Register from './Register';
 import Home from './Home';
 import { auth } from '../firebase/config';
-import Postear from './Postear';
+import Post from './Post';
 import Profile from './Profile';
 import Buscador from "./Buscador";
 
@@ -33,14 +33,14 @@ export default class Menu extends Component{
         auth.signInWithEmailAndPassword(email, password)
         .then(response=> {
             console.log(response);
-            alert("Usuario loggeado");
+            alert("Succesful sign in!");
             this.setState({
                 loggedIn: true
             })
         })
         .catch(response=> {
             console.log(response);
-            alert("Error en el login");
+            alert("Error signing in. Try again!");
             this.setState({
                 error: "Error en loggeo"
             })
@@ -51,7 +51,7 @@ export default class Menu extends Component{
         auth.createUserWithEmailAndPassword(email, password)
         .then(response=>{
             console.log(response);
-            alert("Usuario registrado");
+            alert("All done! Thanks for using the app!");
             response.user.updateProfile({
                 displayName: username
             })
@@ -61,7 +61,7 @@ export default class Menu extends Component{
         })
         .catch(e=> {
             console.log(e);
-            alert("Error en el registro");
+            alert("Error registering user. Try again!");
             this.setState({
                 error: "Fallo en el registro"
             })
@@ -91,8 +91,8 @@ export default class Menu extends Component{
                             <Drawer.Screen name = "Home">
                                 {props => <Home {...props}/>}
                             </Drawer.Screen>
-                            <Drawer.Screen name = "Postear">
-                                {props => <Postear {...props}/>}
+                            <Drawer.Screen name = "Post">
+                                {props => <Post {...props}/>}
                             </Drawer.Screen>
                             <Drawer.Screen name="Search">
                                 {props => <Buscador {...props}/>}
