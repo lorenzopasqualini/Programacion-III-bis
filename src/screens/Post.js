@@ -81,7 +81,7 @@ const styles= StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'lightseagreen'
+        backgroundColor: '#2b3a67'
     },
 
     field: {

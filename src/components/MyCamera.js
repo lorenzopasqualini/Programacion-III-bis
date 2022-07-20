@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'lightseagreen'
+        backgroundColor: '#2b3a67'
     },
 
     camera: {
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     },
 
     reject: {
-        backgroundColor: 'tomato',
+        backgroundColor: 'darksalmon',
         width: 50,
         height: 50,
         borderRadius: 4,

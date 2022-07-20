@@ -97,7 +97,7 @@ export default class Post extends Component{
                         style = {styles.modal}
                         >
                             <View style={styles.modalView}>
-                                <TouchableOpacity onPress={()=>{this.closeModal()}}>
+                                <TouchableOpacity onPress={()=>{this.closeModal()}} style={styles.delete}>
                                     <Emoji symbol="❌" label="delete" />
                                 </TouchableOpacity>
                                 <Comments
@@ -157,17 +157,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         margin: 10,
-        width: 250,
-        borderRadius: 4,
-        backgroundColor: 'darkslategrey',
+        width: 300,
+        borderRadius: 8,
+        backgroundColor: '#496a81',
         position: 'relative',
         zIndex: -1000,
     },
 
     image: {
         flex: 1,
-        width: 250,
-        height: 250,
+        width: 300,
+        height: 300,
         resizeMode: 'contain'
     },
 
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     },
 
     delete:{
-        backgroundColor: 'tomato',
+        backgroundColor: 'darksalmon',
         textAlign: 'center',
         borderRadius: 4,
         padding: 4,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     },
 
     comment:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#66999b',
         textAlign: 'center',
         borderRadius: 4,
         padding: 4,
@@ -202,16 +202,18 @@ const styles = StyleSheet.create({
     },
 
     description:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: 'rgba(0,0,0,0.2)',
         color: 'white',
-        padding: 8,
+        padding: 12,
         width: 250,
+        borderRadius: 4,
     },
 
     descBold:{
         color: 'white',
         padding: 8,
         width: 250,
+        textAlign: 'center'
     },
 
     twobtn:{
@@ -231,8 +233,9 @@ const styles = StyleSheet.create({
     },
 
     modalView:{
-        backgroundColor: 'aquamarine',
+        backgroundColor: '#66999b',
         borderRadius: 4,
         padding: 4,
+        color: 'white'
     }
 })

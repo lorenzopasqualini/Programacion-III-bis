@@ -42,7 +42,7 @@ export default class Post extends Component {
                     keyExtractor={(comment)=> comment.id}
                     renderItem={({ item })=>(
                         <>
-                        <Text>
+                        <Text style={styles.coms}>
                             {item.owner}: {item.comment}
                         </Text>
                         </>
@@ -51,17 +51,19 @@ export default class Post extends Component {
                 ) : null
                 }
 
-                <TextInput
-                keyboardType="default"
-                multiline={true}
-                numberOfLines={1}
-                onChangeText={(text) => this.setState({ comment: text })}
-                value={this.state.comment}
-                style={styles.placeholder}
-                />
-                <TouchableOpacity style={styles.post} onPress={() => this.onComment()}>
-                    <Emoji symbol="✉️" label="send" />
-                </TouchableOpacity>
+                <View style={styles.owncoms}>
+                    <TextInput
+                    keyboardType="default"
+                    multiline={true}
+                    numberOfLines={1}
+                    onChangeText={(text) => this.setState({ comment: text })}
+                    value={this.state.comment}
+                    style={styles.placeholder}
+                    />
+                    <TouchableOpacity style={styles.postbtn} onPress={() => this.onComment()}>
+                        <Emoji symbol="✉️" label="send" />
+                    </TouchableOpacity>    
+                </View>          
             </View>
         );
     }
@@ -72,18 +74,34 @@ const styles= StyleSheet.create({
         flex: 1,
     },
 
-    post:{
-        flex: 1,
-        alignItems: 'center',
-        width: 50,
+    postbtn:{
         backgroundColor: 'greenyellow',
-        padding: 4,
-        margin: 4,
+        textAlign: 'center',
         borderRadius: 4,
+        padding: 4,
+        margin: 2,
+        width: 50,
+        flex: 1,
+        alignItems: 'center'
     },
 
     placeholder:{
         backgroundColor: 'white',
-        borderRadius: 4,
+        borderRadius: 2,
+        margin: 2
     },
+
+    coms:{
+        color: 'white',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        borderRadius: 2,
+        padding: 2,
+        marginTop: 2,
+        marginBottom: 2
+    },
+
+    owncoms:{
+        flex: 1,
+        flexDirection: 'row'
+    }
 });

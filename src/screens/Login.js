@@ -41,23 +41,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'lightseagreen'
+        backgroundColor: '#2b3a67'
     },
 
     field: {
-        width: 250,
+        width: 300,
         backgroundColor: 'white',
         padding: 10,
         marginVertical: 10,
+        marginBottom: -2,
         borderRadius: 4
     },
 
     button: {
-        width: 250,
         backgroundColor: 'greenyellow',
-        textAlign: 'center',
         padding: 10,
-        borderRadius: 4
+        marginVertical: 10,
+        borderRadius: 4,
+        textAlign: 'center'
     },
 
     text: {

@@ -61,11 +61,11 @@ const styles= StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'lightseagreen'
+        backgroundColor: '#2b3a67'
     },
 
     button: {
-        backgroundColor: 'tomato',
+        backgroundColor: 'darksalmon',
         textAlign: 'center',
         borderRadius: 4,
         padding: 4,
@@ -75,7 +75,10 @@ const styles= StyleSheet.create({
 
     text: {
         color: 'white',
-        textAlign: 'center',
-        margin: 4,
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        borderRadius: 2,
+        padding: 2,
+        marginTop: 2,
+        marginBottom: 2
     },
 })
